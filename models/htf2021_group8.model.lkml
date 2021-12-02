@@ -34,7 +34,18 @@ explore: bnbreservations {}
 
 explore: events {}
 
-explore: physical_characteristics {}
+explore: physical_characteristics {
+  join: people {
+    type: left_outer
+    sql_on: ${physical_characteristics.id} = ${people.id} ;;
+    relationship: many_to_one
+  }
+  join: gender {
+    type: left_outer
+    sql_on: ${physical_characteristics.id} = ${gender.id} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: financial_status {}
 
