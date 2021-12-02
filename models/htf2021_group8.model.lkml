@@ -69,4 +69,8 @@ explore: ride_passengers {
     type: left_outer
     sql_on: ${people.id} = ${ride_passengers.passenger_id} ;;
   }
+  join: ride_info {
+    type: left_outer
+    sql_on: ${ride_passengers.ride_id} = ${ride_info.ride_id} ;;
+  }
 }

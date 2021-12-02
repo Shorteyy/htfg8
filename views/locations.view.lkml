@@ -9,9 +9,20 @@ view: locations {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: location {
+  dimension: lattitude {
     type: string
-    sql: ${TABLE}.location ;;
+    sql: SPLIT(${TABLE}.location, ", ")[SAFE_OFFSET(0)] ;;
+  }
+
+  dimension: longitude {
+    type: string
+    sql: SPLIT(${TABLE}.location, ", ")[SAFE_OFFSET(1)] ;;
+  }
+
+  dimension: location {
+    type: location
+    sql_latitude:${lattitude} ;;
+    sql_longitude:${longitude} ;;
   }
 
   measure: count {
