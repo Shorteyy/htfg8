@@ -18,7 +18,23 @@ explore: company_employees {}
 
 explore: aib_bnbs_nyc {}
 
-explore: bnbcheckins {}
+explore: bnbcheckins {
+  join: people {
+    type: left_outer
+    sql_on: ${bnbcheckins.person_id2} = ${people.id} ;;
+    relationship: many_to_one
+  }
+  join: aib_bnbs_nyc {
+    type: left_outer
+    sql_on: ${bnbcheckins.bnb_id1} = ${aib_bnbs_nyc.id} ;;
+    relationship: many_to_one
+  }
+  join: bnbreservations{
+    type: left_outer
+    sql_on: ${bnbcheckins.bnb_id1} = ${bnbreservations.bnbid} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: event_reviews {
   join: events {
@@ -43,6 +59,21 @@ explore: physical_characteristics {
   join: gender {
     type: left_outer
     sql_on: ${physical_characteristics.id} = ${gender.id} ;;
+    relationship: many_to_one
+  }
+  join: ages {
+    type: left_outer
+    sql_on: ${physical_characteristics.id} = ${ages.id} ;;
+    relationship: many_to_one
+  }
+  join: religions {
+    type: left_outer
+    sql_on: ${physical_characteristics.id} = ${religions.id} ;;
+    relationship: many_to_one
+  }
+  join: financial_status {
+    type: left_outer
+    sql_on: ${physical_characteristics.id} = ${financial_status.id} ;;
     relationship: many_to_one
   }
 }
@@ -79,9 +110,13 @@ explore: ride_passengers {
   join: people {
     type: left_outer
     sql_on: ${people.id} = ${ride_passengers.passenger_id} ;;
+    relationship: many_to_one
+
   }
   join: ride_info {
     type: left_outer
     sql_on: ${ride_passengers.ride_id} = ${ride_info.ride_id} ;;
+    relationship: many_to_one
+
   }
 }
