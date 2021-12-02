@@ -82,7 +82,13 @@ explore: financial_status {}
 
 explore: gender {}
 
-explore: locations {}
+explore: locations {
+  join: events {
+    type: left_outer
+    sql_on: ${events.id} = ${locations.id} ;;
+    relationship: many_to_one
+  }
+}
 
 explore: people {}
 
