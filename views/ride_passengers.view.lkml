@@ -4,7 +4,7 @@ view: ride_passengers {
 
   dimension: passenger_id {
     type: number
-    sql: ${TABLE}.PassengerId ;;
+    sql: ${TABLE}.PassengerId;;
   }
 
   dimension: ride_id {
